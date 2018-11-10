@@ -1,0 +1,14 @@
+certifi==2018.10.15
+chardet==3.0.4
+idna==2.7
+jmespath==0.9.3
+pip==18.1
+pybacklog==0.1.5
+pytz==2018.7
+PyYAML==3.13
+requests==2.20.1
+ruamel.appconfig==0.5.4
+ruamel.std.argparse==0.8.1
+setuptools==39.0.1
+urllib3==1.24.1
+zope.interface==4.6.0
