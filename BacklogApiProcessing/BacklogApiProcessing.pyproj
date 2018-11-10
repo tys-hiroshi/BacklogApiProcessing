@@ -26,6 +26,9 @@
     <Compile Include="utils\config_util.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="utils\issue_util.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="utils\log_util.py">
       <SubType>Code</SubType>
     </Compile>
@@ -43,6 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config.yml" />
+    <Content Include="logging_debug.conf" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
