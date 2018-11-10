@@ -1,12 +1,14 @@
 import requests
 import json
 import jmespath
+from datetime import datetime, timedelta, timezone
 
 class IssueUtil():
-    def __init__(self, host, api_key, project_id):
+    def __init__(self, host, api_key, project_id, MAX_COUNT = 20):
         self.project_id = project_id
         self.host = host
         self.api_params = {'apiKey': api_key}
+        self.max_count = MAX_COUNT
         
     def get_issue_list(self, updated_since, updated_until):
         url = '{host}/api/v2/issues'.format(**{'host': self.host})
@@ -33,3 +35,26 @@ class IssueUtil():
         print(data)
         print(jmespath.search("changeLog[?field=='actualHours'].newValue", data))
         print(jmespath.search("changeLog[?field=='actualHours']", data))
+
+    def get_updated_issue_keys(self, client, project_id, issue_type_id, updated_since, updated_until):
+        issue_keys = []
+        count  = 1
+        while count > 0:
+            params = {"projectId[]":[project_id], "issueTypeId[]": [issue_type_id] , "sort": "updated", "count": self.max_count, "updatedSince": updated_since, "updatedUntil": updated_until, "order": "desc"}
+            issues = client.issues(params)  #TODO: updatedSince is UTC+0000?
+            _issue_keys = jmespath.search("[*].issueKey", issues)
+            issue_keys.extend(_issue_keys)
+            last_issue = issues[len(issues) - 1]
+            last_issue_key = jmespath.search("issueKey", last_issue)
+            last_updated = jmespath.search("updated", last_issue)
+            last_updated_dt = datetime.strptime(last_updated, '%Y-%m-%dT%H:%M:%SZ')
+            #print(last_updated_dt.replace(tzinfo=jp))
+
+            print(last_issue_key)
+            print(last_updated)
+
+            updated_until = last_updated_dt.strftime("%Y-%m-%d")
+            count = len(issues)  #TODO:
+            if count < self.max_count:
+                break
+        return issue_keys
