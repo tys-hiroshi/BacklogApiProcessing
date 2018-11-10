@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "BacklogApiProcessing", "BacklogApiProcessing.pyproj", "{2BAA44FA-2599-4D19-BD52-1F1D77B8F2A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BAA44FA-2599-4D19-BD52-1F1D77B8F2A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BAA44FA-2599-4D19-BD52-1F1D77B8F2A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5556397-0FF2-468B-BA63-70837FBA8FD0}
+	EndGlobalSection
+EndGlobal
