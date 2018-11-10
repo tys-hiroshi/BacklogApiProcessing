@@ -1,0 +1,7 @@
+HOST:
+  GLOBAL: 'https://toyoko.backlog.jp'
+  IP: 'https://toyoko-ip.backlog.com'
+
+API_KEY:
+  GLOBAL: ''
+  IP: ''
