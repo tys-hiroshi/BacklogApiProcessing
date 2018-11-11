@@ -37,3 +37,14 @@ issueUtil = issue_util.IssueUtil(HOST, API_KEY, project_id, MAX_COUNT)
 issue_keys = issueUtil.get_updated_issue_keys(client, project_id, issue_type_id, updated_since, updated_until)
 print(issue_keys)
 print(len(issue_keys))
+
+for key in issue_keys:
+    query_params = {"count": MAX_COUNT, "order": "desc"}
+    issue_comments = client.issue_comments(key, query_params)
+    updated_list = jmespath.search("[*].updated", issue_comments)
+    for i in range(len(updated_list)):
+        search_str = "[" + str(i) + "]" + ".changeLog[?field=='actualHours'].newValue"
+        logUtil.info(jmespath.search(search_str, issue_comments))
+    #logUtil.info(issue_comments)
+
+# https://developer.nulab-inc.com/ja/docs/backlog/api/2/get-comment-list/
