@@ -42,6 +42,8 @@ class IssueUtil():
         while count > 0:
             params = {"projectId[]":[project_id], "issueTypeId[]": [issue_type_id] , "sort": "updated", "count": self.max_count, "updatedSince": updated_since, "updatedUntil": updated_until, "order": "desc"}
             issues = client.issues(params)  #TODO: updatedSince is UTC+0000?
+            if len(issues) == 0:
+                break
             _issue_keys = jmespath.search("[*].issueKey", issues)
             issue_keys.extend(_issue_keys)
             last_issue = issues[len(issues) - 1]

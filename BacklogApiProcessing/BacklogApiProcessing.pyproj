@@ -29,10 +29,19 @@
     <Compile Include="utils\count_actual_hours_util.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="utils\issue_type_util.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="utils\issue_util.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="utils\log_util.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="utils\process_project_util.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="utils\term_util.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
