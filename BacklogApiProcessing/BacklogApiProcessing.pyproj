@@ -26,6 +26,9 @@
     <Compile Include="utils\config_util.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="utils\count_actual_hours_util.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="utils\issue_util.py">
       <SubType>Code</SubType>
     </Compile>
