@@ -1,10 +1,12 @@
 # https://backlog.com/developer/applications/
+# https://developer.nulab-inc.com/ja/docs/backlog/
 
 from datetime import datetime, timedelta, timezone
 import pytz
 from utils import config_util  # from [DirName] import [fileName]
 from utils import issue_util  # from [DirName] import [fileName]
 from utils import log_util  # from [DirName] import [fileName]
+from utils import count_actual_hours_util
 import requests
 import json
 import jmespath
@@ -38,13 +40,20 @@ issue_keys = issueUtil.get_updated_issue_keys(client, project_id, issue_type_id,
 print(issue_keys)
 print(len(issue_keys))
 
-for key in issue_keys:
-    query_params = {"count": MAX_COUNT, "order": "desc"}
-    issue_comments = client.issue_comments(key, query_params)
-    updated_list = jmespath.search("[*].updated", issue_comments)
-    for i in range(len(updated_list)):
-        search_str = "[" + str(i) + "]" + ".changeLog[?field=='actualHours'].newValue"
-        logUtil.info(jmespath.search(search_str, issue_comments))
-    #logUtil.info(issue_comments)
+updated_since = '2018-10-01 0:00:00'
+updated_until = '2018-11-01 0:00:00'
+
+countActualHoursUtil = count_actual_hours_util.CountActualHoursUtil(client, updated_since, updated_until, MAX_COUNT)
+actual_hours_list = []
+#issue_key = 'FFIS_SMAPHOSYS-380'
+#actual_hours = countActualHoursUtil.select_actual_hours(issue_key)
+#actual_hours_list.append(actual_hours)
+for issue_key in issue_keys:
+    actual_hours = countActualHoursUtil.select_actual_hours(issue_key)
+    actual_hours_list.append(actual_hours)
+
+print(actual_hours_list)
+print(sum(actual_hours_list))
+print(sum(actual_hours_list) / 7.5)
 
 # https://developer.nulab-inc.com/ja/docs/backlog/api/2/get-comment-list/
