@@ -1,5 +1,7 @@
 # https://backlog.com/developer/applications/
 # https://developer.nulab-inc.com/ja/docs/backlog/
+# https://developer.nulab-inc.com/ja/docs/backlog/api/2/get-comment-list/
+
 
 from datetime import datetime, timedelta, timezone
 import pytz
@@ -53,7 +55,7 @@ for issue_key in issue_keys:
     actual_hours_list.append(actual_hours)
 
 print(actual_hours_list)
-print(sum(actual_hours_list))
-print(sum(actual_hours_list) / 7.5)
-
-# https://developer.nulab-inc.com/ja/docs/backlog/api/2/get-comment-list/
+logUtil.info("actual_hours")
+logUtil.info(sum(actual_hours_list))
+logUtil.info("person-hours")
+logUtil.info(sum(actual_hours_list) / 7.5)
