@@ -17,10 +17,14 @@ PROCESSING_ISSUE_TYPE_NAME is issue type name of the totaling up.
 3.Run BacklogApiProcessing/BacklogApiProcessing/BacklogApiProcessing.py
 
 ```
-cd BacklogApiProcessing/BacklogApiProcessing
-python BacklogApiProcessing.py
+$ cd BacklogApiProcessing/BacklogApiProcessing
+$ python BacklogApiProcessing.py
 ```
 
 4.You can see BacklogApiProcessing.log.
 
 ```actual_hours``` is project actual hours of issue type in term.
+
+## Require
+
+follow the BacklogApiProcessing/BacklogApiProcessing/requirements.txt
