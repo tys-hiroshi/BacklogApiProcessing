@@ -9,7 +9,7 @@ class IssueUtil():
         self.host = host
         self.api_params = {'apiKey': api_key}
         self.max_count = MAX_COUNT
-        
+
     def get_issue_list(self, updated_since, updated_until):
         url = '{host}/api/v2/issues'.format(**{'host': self.host})
         print(url)
