@@ -40,6 +40,7 @@ issueTypeUtil = issue_type_util.IssueTypeUtil(client)
 termUtil = term_util.TermUtil()
 MAX_COUNT = 100
 
+projects_actual_hours_list = []
 for project_key in project_keys:
     logUtil.info("start processing: " + project_key)
     project_id = client.get_project_id(project_key)
@@ -61,6 +62,10 @@ for project_key in project_keys:
 
         print(actual_hours_list)
         logUtil.info("actual_hours")
-        logUtil.info(sum(actual_hours_list))
+        sum_actual_hours = sum(actual_hours_list)
+        projects_actual_hours_list.append(sum_actual_hours)
+        logUtil.info(sum_actual_hours)
         logUtil.info("person-hours")
         logUtil.info(sum(actual_hours_list) / 7.5)
+
+logUtil.info(projects_actual_hours_list)
