@@ -6,10 +6,9 @@ BacklogApiProcessing is the totaling up of issues that the issue type in term.
 
 1.Clone this repository
 
-2.You modified BacklogApiProcessing/BacklogApiProcessing/config.yml.
+2.You should modifiy BacklogApiProcessing/BacklogApiProcessing/config.yml.
 
 ```
-API_KEY.GLOBAL is global api key.
 API_KEY.GLOBAL is global api key.
 PROCESSING_PROJECT_KEY is project keys of the totaling up.
 PROCESSING_TERM is term of the totaling up.
