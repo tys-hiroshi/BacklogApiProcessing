@@ -11,6 +11,7 @@ from utils import log_util  # from [DirName] import [fileName]
 from utils import count_actual_hours_util
 from utils import issue_type_util
 from utils import term_util
+from utils import wiki_util
 import requests
 import json
 import jmespath
@@ -40,35 +41,45 @@ issueTypeUtil = issue_type_util.IssueTypeUtil(client)
 termUtil = term_util.TermUtil()
 MAX_COUNT = 100
 
-projects_actual_hours_list = []
-for project_key in project_keys:
-    logUtil.info("start processing: " + project_key)
-    project_id = client.get_project_id(project_key)
-    issue_type_id = issueTypeUtil.select_issue_type_id(project_key, issue_type_name)
-    if issue_type_id != '':
-        issueUtil = issue_util.IssueUtil(HOST, API_KEY, project_id, MAX_COUNT)
-        issue_keys = issueUtil.get_updated_issue_keys(client, project_id, issue_type_id, updated_start_date, updated_end_date)
-        print(issue_keys)
-        print(len(issue_keys))
+#projects_actual_hours_list = []
+#for project_key in project_keys:
+#    logUtil.info("start processing: " + project_key)
+#    project_id = client.get_project_id(project_key)
+#    issue_type_id = issueTypeUtil.select_issue_type_id(project_key, issue_type_name)
+#    if issue_type_id == '':
+#        projects_actual_hours_list.append(0)
+#    else:
+#        issueUtil = issue_util.IssueUtil(HOST, API_KEY, project_id, MAX_COUNT)
+#        issue_keys = issueUtil.get_updated_issue_keys(client, project_id, issue_type_id, updated_start_date, updated_end_date)
+#        print(issue_keys)
+#        print(len(issue_keys))
 
-        updated_since = updated_start_date + ' 0:00:00'
-        updated_until = termUtil.select_next_month_datetime(datetime.strptime(updated_end_date, '%Y-%m-%d')) + ' 0:00:00'
+#        updated_since = updated_start_date + ' 0:00:00'
+#        updated_until = termUtil.select_next_month_datetime(datetime.strptime(updated_end_date, '%Y-%m-%d')) + ' 0:00:00'
 
-        countActualHoursUtil = count_actual_hours_util.CountActualHoursUtil(client, updated_since, updated_until, MAX_COUNT)
-        actual_hours_list = []
-        for issue_key in issue_keys:
-            actual_hours = countActualHoursUtil.select_actual_hours(issue_key)
-            actual_hours_list.append(actual_hours)
+#        countActualHoursUtil = count_actual_hours_util.CountActualHoursUtil(client, updated_since, updated_until, MAX_COUNT)
+#        actual_hours_list = []
+#        for issue_key in issue_keys:
+#            actual_hours = countActualHoursUtil.select_actual_hours(issue_key)
+#            actual_hours_list.append(actual_hours)
 
-        print(actual_hours_list)
-        logUtil.info("actual_hours")
-        sum_actual_hours = sum(actual_hours_list)
-        projects_actual_hours_list.append(sum_actual_hours)
-        logUtil.info(sum_actual_hours)
-        logUtil.info("person-days")
-        logUtil.info(sum(actual_hours_list) / 7.5)
+#        print(actual_hours_list)
+#        logUtil.info("actual_hours")
+#        sum_actual_hours = sum(actual_hours_list)
+#        projects_actual_hours_list.append(sum_actual_hours)
+#        logUtil.info(sum_actual_hours)
+#        logUtil.info("person-days")
+#        logUtil.info(sum(actual_hours_list) / 7.5)
 
-logUtil.info(projects_actual_hours_list)
+#logUtil.info(projects_actual_hours_list)
 
+projects_actual_hours_list = [13.0, 2.0, 134.8, 1.0, 2.5, 1.5, 0, 1.5, 0, 0, 4.0, 2.0, 2.5, 0, 0]
 wikiUtil = wiki_util.WikiUtil(client)
-wiki_page = wikiUtil.get_wiki_page('385520')
+wiki_id = '385520'
+wiki_page = wikiUtil.get_wiki_page(wiki_id)
+wiki_name = jmespath.search("name", wiki_page)
+wiki_content_table = jmespath.search("content", wiki_page)
+print(wiki_content_table.split('\r\n'))
+
+added_content = wikiUtil.add_actual_hours_to_content(wiki_content_table, projects_actual_hours_list, "2018-10")
+wikiUtil.update_wiki_page(wiki_id, wiki_name, added_content, False)
