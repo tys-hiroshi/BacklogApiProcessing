@@ -6,5 +6,5 @@ class ConfigUtil():
         pass
 
     def read_yaml_file(self, filePath):
-        with open(filePath, "r") as yml:
+        with open(filePath, "r", encoding="utf-8") as yml:
             return yaml.load(yml)
