@@ -51,18 +51,24 @@ for project_key in project_keys:
         projects_actual_hours_list.append(0)
     else:
         issueUtil = issue_util.IssueUtil(HOST, API_KEY, project_id, MAX_COUNT)
-        issue_keys = issueUtil.get_updated_issue_keys(client, project_id, issue_type_id, updated_start_date, updated_end_date)
-        print(issue_keys)
-        print(len(issue_keys))
-
+        issue_keys = []
+        updated_issue_keys = issueUtil.get_updated_issue_keys(client, project_id, issue_type_id, updated_start_date, updated_end_date)
+        created_issue_keys = issueUtil.get_updated_issue_keys(client, project_id, issue_type_id, updated_start_date, updated_end_date, False)
+        issue_keys.extend(updated_issue_keys)
+        issue_keys.extend(created_issue_keys)
+        issue_keys_uniq = list(set(issue_keys))
+        issue_keys_uniq.sort()
+        print(issue_keys_uniq)
+        print(len(issue_keys_uniq))
         updated_since = updated_start_date + ' 0:00:00'
         updated_until = termUtil.select_next_month_datetime(datetime.strptime(updated_end_date, '%Y-%m-%d')) + ' 0:00:00'
 
         countActualHoursUtil = count_actual_hours_util.CountActualHoursUtil(client, updated_since, updated_until, MAX_COUNT)
         actual_hours_list = []
-        for issue_key in issue_keys:
+        for issue_key in issue_keys_uniq:
             actual_hours = countActualHoursUtil.select_actual_hours(issue_key)
             actual_hours_list.append(actual_hours)
+            print(issue_key + "," + str(actual_hours))
 
         print(actual_hours_list)
         logUtil.info("actual_hours")
@@ -74,11 +80,12 @@ for project_key in project_keys:
 
 logUtil.info(projects_actual_hours_list)
 
-wikiUtil = wiki_util.WikiUtil(client)
-wiki_id = config_data['PROCESSING_UPDATE_WIKI_ID']
-wiki_page = wikiUtil.get_wiki_page(wiki_id)
-wiki_name = jmespath.search("name", wiki_page)
-wiki_content_table = jmespath.search("content", wiki_page)
-head_row_name = updated_start_date + " to " + updated_end_date
-added_content = wikiUtil.add_actual_hours_to_content(wiki_content_table, projects_actual_hours_list, head_row_name)
-wikiUtil.update_wiki_page(wiki_id, wiki_name, added_content, False)
+if str(config_data['PROCESSING_UPDATE_WIKI']['IS_UPDATE']).lower().strip() == 'true':
+    wikiUtil = wiki_util.WikiUtil(client)
+    wiki_id = config_data['PROCESSING_UPDATE_WIKI']['WIKI_ID']
+    wiki_page = wikiUtil.get_wiki_page(wiki_id)
+    wiki_name = jmespath.search("name", wiki_page)
+    wiki_content_table = jmespath.search("content", wiki_page)
+    head_row_name = updated_start_date + " to " + updated_end_date
+    added_content = wikiUtil.add_actual_hours_to_content(wiki_content_table, projects_actual_hours_list, head_row_name)
+    wikiUtil.update_wiki_page(wiki_id, wiki_name, added_content, False)
