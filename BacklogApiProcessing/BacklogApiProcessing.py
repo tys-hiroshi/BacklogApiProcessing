@@ -79,7 +79,6 @@ wiki_id = config_data['PROCESSING_UPDATE_WIKI_ID']
 wiki_page = wikiUtil.get_wiki_page(wiki_id)
 wiki_name = jmespath.search("name", wiki_page)
 wiki_content_table = jmespath.search("content", wiki_page)
-print(wiki_content_table.split('\r\n'))
 head_row_name = updated_start_date + " to " + updated_end_date
 added_content = wikiUtil.add_actual_hours_to_content(wiki_content_table, projects_actual_hours_list, head_row_name)
 wikiUtil.update_wiki_page(wiki_id, wiki_name, added_content, False)
