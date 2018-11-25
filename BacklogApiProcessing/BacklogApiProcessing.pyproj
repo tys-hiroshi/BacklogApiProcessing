@@ -44,6 +44,9 @@
     <Compile Include="utils\term_util.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="utils\wiki_util.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">

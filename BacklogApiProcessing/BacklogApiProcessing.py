@@ -69,3 +69,6 @@ for project_key in project_keys:
         logUtil.info(sum(actual_hours_list) / 7.5)
 
 logUtil.info(projects_actual_hours_list)
+
+wikiUtil = wiki_util.WikiUtil(client)
+wiki_page = wikiUtil.get_wiki_page('385520')
