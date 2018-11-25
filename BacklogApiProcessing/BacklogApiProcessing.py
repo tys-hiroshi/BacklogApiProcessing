@@ -11,6 +11,7 @@ from utils import log_util  # from [DirName] import [fileName]
 from utils import count_actual_hours_util
 from utils import issue_type_util
 from utils import term_util
+from utils import wiki_util
 import requests
 import json
 import jmespath
@@ -36,15 +37,19 @@ updated_start_date = config_data['PROCESSING_TERM']['START_DATE']
 updated_end_date = config_data['PROCESSING_TERM']['END_DATE']
 project_keys = config_data['PROCESSING_PROJECT_KEY']
 issue_type_name = config_data['PROCESSING_ISSUE_TYPE_NAME']
+person_hours_per_day = config_data['PERSON_HOURS_PER_DAY']
 issueTypeUtil = issue_type_util.IssueTypeUtil(client)
 termUtil = term_util.TermUtil()
 MAX_COUNT = 100
 
+projects_actual_hours_list = []
 for project_key in project_keys:
     logUtil.info("start processing: " + project_key)
     project_id = client.get_project_id(project_key)
     issue_type_id = issueTypeUtil.select_issue_type_id(project_key, issue_type_name)
-    if issue_type_id != '':
+    if issue_type_id == '':
+        projects_actual_hours_list.append(0)
+    else:
         issueUtil = issue_util.IssueUtil(HOST, API_KEY, project_id, MAX_COUNT)
         issue_keys = issueUtil.get_updated_issue_keys(client, project_id, issue_type_id, updated_start_date, updated_end_date)
         print(issue_keys)
@@ -61,6 +66,20 @@ for project_key in project_keys:
 
         print(actual_hours_list)
         logUtil.info("actual_hours")
-        logUtil.info(sum(actual_hours_list))
-        logUtil.info("person-hours")
-        logUtil.info(sum(actual_hours_list) / 7.5)
+        sum_actual_hours = sum(actual_hours_list)
+        projects_actual_hours_list.append(sum_actual_hours)
+        logUtil.info(sum_actual_hours)
+        logUtil.info("person-days")
+        logUtil.info(sum(actual_hours_list) / float(person_hours_per_day))
+
+logUtil.info(projects_actual_hours_list)
+
+wikiUtil = wiki_util.WikiUtil(client)
+wiki_id = config_data['PROCESSING_UPDATE_WIKI_ID']
+wiki_page = wikiUtil.get_wiki_page(wiki_id)
+wiki_name = jmespath.search("name", wiki_page)
+wiki_content_table = jmespath.search("content", wiki_page)
+print(wiki_content_table.split('\r\n'))
+head_row_name = updated_start_date + " to " + updated_end_date
+added_content = wikiUtil.add_actual_hours_to_content(wiki_content_table, projects_actual_hours_list, head_row_name)
+wikiUtil.update_wiki_page(wiki_id, wiki_name, added_content, False)
