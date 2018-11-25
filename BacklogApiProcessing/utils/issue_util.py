@@ -23,24 +23,15 @@ class IssueUtil():
         print(json.dumps(r.json(), indent=2))
         print(data)
 
-    def get_issue_comment(self):
-        issueIdOrKey = 'FFIS_SMAPHOSYS-489'
-        commentId = '39332511'
-        url = '{host}/api/v2/issues/{issueIdOrKey}/comments/{commentId}'.format(**{'host': HOST, 'issueIdOrKey': issueIdOrKey, 'commentId': commentId})
-        print(url)
-        r = requests.get(url, params=self.api_params)
-        data = r.json()
-        print(r.json())
-        print(json.dumps(r.json(), indent=2))
-        print(data)
-        print(jmespath.search("changeLog[?field=='actualHours'].newValue", data))
-        print(jmespath.search("changeLog[?field=='actualHours']", data))
-
-    def get_updated_issue_keys(self, client, project_id, issue_type_id, updated_since, updated_until):
+    def get_updated_issue_keys(self, client, project_id, issue_type_id, updated_since, updated_until, is_updated = True):
         issue_keys = []
         count  = 1
         while count > 0:
-            params = {"projectId[]":[project_id], "issueTypeId[]": [issue_type_id] , "sort": "updated", "count": self.max_count, "updatedSince": updated_since, "updatedUntil": updated_until, "order": "desc"}
+            params = {}
+            if is_updated == True:
+                params = {"projectId[]":[project_id], "issueTypeId[]": [issue_type_id] , "sort": "updated", "count": self.max_count, "updatedSince": updated_since, "updatedUntil": updated_until, "order": "desc"}
+            else:
+                params = {"projectId[]":[project_id], "issueTypeId[]": [issue_type_id] , "sort": "updated", "count": self.max_count, "createdSince": updated_since, "createdUntil": updated_until, "order": "desc"}
             issues = client.issues(params)  #TODO: updatedSince is UTC+0000?
             if len(issues) == 0:
                 break
@@ -52,8 +43,8 @@ class IssueUtil():
             last_updated_dt = datetime.strptime(last_updated, '%Y-%m-%dT%H:%M:%SZ')
             #print(last_updated_dt.replace(tzinfo=jp))
 
-            print(last_issue_key)
-            print(last_updated)
+            #print(last_issue_key)
+            #print(last_updated)
 
             updated_until = last_updated_dt.strftime("%Y-%m-%d")
             count = len(issues)  #TODO:
