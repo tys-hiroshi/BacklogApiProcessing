@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # https://backlog.com/developer/applications/
 # https://developer.nulab-inc.com/ja/docs/backlog/
 # https://developer.nulab-inc.com/ja/docs/backlog/api/2/get-comment-list/

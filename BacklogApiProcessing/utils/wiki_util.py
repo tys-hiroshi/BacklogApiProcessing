@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests
 import json
 import jmespath
@@ -15,6 +16,8 @@ class WikiUtil():
         wiki_content_row_list = wiki_content_table.split('\r\n')
         add_last_row_list = [head_row_name, "----"]
         add_last_row_list.extend(list(map(str, actual_hours_list)))
+        sum_actual_hours_list = [sum(actual_hours_list)]
+        add_last_row_list.extend(list(map(str, sum_actual_hours_list)))
         for i in range(len(wiki_content_row_list)):
             wiki_content_row_list[i] = wiki_content_row_list[i] + " " + add_last_row_list[i] + " |"
 

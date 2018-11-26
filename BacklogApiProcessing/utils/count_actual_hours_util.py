@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 import jmespath
 from datetime import datetime, timedelta, timezone
@@ -72,5 +73,3 @@ class CountActualHoursUtil():
         #print("new_value:" + str(new_value))
 
         return new_value - original_value
-
-    #def __conv_str_to_float_list(self, str_list):
