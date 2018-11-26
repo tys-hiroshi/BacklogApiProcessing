@@ -32,7 +32,6 @@ logUtil = log_util.LogUtil()
 logUtil.info("start")
 
 # Get Issue List
-
 updated_start_date = config_data['PROCESSING_TERM']['START_DATE']
 updated_end_date = config_data['PROCESSING_TERM']['END_DATE']
 project_keys = config_data['PROCESSING_PROJECT_KEY']
@@ -79,8 +78,8 @@ for project_key in project_keys:
         logUtil.info(sum(actual_hours_list) / float(person_hours_per_day))
 
 logUtil.info(projects_actual_hours_list)
-
-if str(config_data['PROCESSING_UPDATE_WIKI']['IS_UPDATE']).lower().strip() == 'true':
+IS_UPDATE_WIKI = config_data['PROCESSING_UPDATE_WIKI']['IS_UPDATE']
+if IS_UPDATE_WIKI == True:
     wikiUtil = wiki_util.WikiUtil(client)
     wiki_id = config_data['PROCESSING_UPDATE_WIKI']['WIKI_ID']
     wiki_page = wikiUtil.get_wiki_page(wiki_id)
