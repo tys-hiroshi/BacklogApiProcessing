@@ -13,7 +13,10 @@ API_KEY.GLOBAL is global api key.
 PROCESSING_PROJECT_KEY is project keys of the totaling up.
 PROCESSING_TERM is term of the totaling up.
 PROCESSING_ISSUE_TYPE_NAME is issue type name of the totaling up.
+PROCESSING_UPDATE_WIKI.IS_UPDATE is to update wiki flag.
+PROCESSING_UPDATE_WIKI.WIKI_ID is update wiki id.
 ```
+
 
 3.Run BacklogApiProcessing/BacklogApiProcessing/BacklogApiProcessing.py
 
@@ -26,6 +29,10 @@ $ python BacklogApiProcessing.py
 
 ```actual_hours``` is project actual hours of issue type in term.
 
-## Require
+5.You can see backlog's wiki.(PROCESSING_UPDATE_WIKI.WIKI_ID)
+
+Project actual hours is listed.
+
+## Requirements
 
 follow the BacklogApiProcessing/BacklogApiProcessing/requirements.txt
