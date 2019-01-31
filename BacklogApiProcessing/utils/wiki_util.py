@@ -31,7 +31,7 @@ class WikiUtil():
         for i in range(len(wiki_content_row_list_table)):
             wiki_content_row_list_table[i] = wiki_content_row_list_table[i] + " " + add_last_row_list[i] + " |"
         wiki_content_table = '\r\n'.join(wiki_content_row_list_table)
-        wiki_content_out_of_table = '\r\n'.join(wiki_content_row_list_out_of_table)
+        wiki_content_out_of_table = '\r\n\r\n\r\n'.join(wiki_content_row_list_out_of_table)
         return wiki_content_table + wiki_content_out_of_table
 
     def update_wiki_page(self, wiki_id, name, content, mail_notify):
