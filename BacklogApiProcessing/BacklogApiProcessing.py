@@ -79,6 +79,10 @@ for project_key in project_keys:
         logUtil.info(sum(actual_hours_list) / float(person_hours_per_day))
 
 logUtil.info(projects_actual_hours_list)
+logUtil.info('sum projects_actual_hours_list')
+logUtil.info(sum(projects_actual_hours_list))
+logUtil.info(sum(projects_actual_hours_list) / float(person_hours_per_day))
+
 IS_UPDATE_WIKI = config_data['PROCESSING_UPDATE_WIKI']['IS_UPDATE']
 if IS_UPDATE_WIKI == True:
     wikiUtil = wiki_util.WikiUtil(client)
