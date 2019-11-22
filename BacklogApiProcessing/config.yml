@@ -1,20 +1,21 @@
-HOST:
-  GLOBAL: 'https://toyoko.backlog.jp'
-  IP: 'https://toyoko-ip.backlog.com'
-
 API_KEY:
   GLOBAL: ''
   IP: ''
 
-PERSON_HOURS_PER_DAY: 7.5
+WIKI_SPACE: 'toyoko'
+
+#PERSON_HOURS_PER_DAY: 7.5
+
 PROCESSING_PROJECT_KEY:
   - [ProjectKey]
 
-PROCESSING_TERM:
-  START_DATE: '2018-11-01'
-  END_DATE: '2018-11-30'
+#PROCESSING_TERM:
+#  START_DATE: '2019-11-01'
+#  END_DATE: '2019-11-30'
 
 PROCESSING_ISSUE_TYPE_NAME: 'タスク（保守）'
+
 PROCESSING_UPDATE_WIKI:
-  IS_UPDATE: true
-  WIKI_ID: ''
+#  IS_UPDATE: true
+  SUMMARY_WIKI_ID: 0
+  DETAIL_WIKI_ID: 0

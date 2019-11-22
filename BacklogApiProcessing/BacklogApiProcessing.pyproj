@@ -12,6 +12,12 @@
     <Name>BacklogApiProcessing</Name>
     <RootNamespace>BacklogApiProcessing</RootNamespace>
     <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterArguments>
+    </InterpreterArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+    <CommandLineArguments>
+    </CommandLineArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -26,16 +32,28 @@
     <Compile Include="models\markdown_model.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="utils\AppManager.py" />
+    <Compile Include="utils\Config.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="utils\config_util.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="utils\count_actual_hours_util.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="utils\Detail.py" />
+    <Compile Include="utils\Issue.py" />
     <Compile Include="utils\issue_type_util.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="utils\issue_util.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="utils\Logger.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="utils\log_util.py">
@@ -44,9 +62,13 @@
     <Compile Include="utils\process_project_util.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="utils\Project.py" />
+    <Compile Include="utils\Summary.py" />
     <Compile Include="utils\term_util.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="utils\Utils.py" />
+    <Compile Include="utils\WikiBase.py" />
     <Compile Include="utils\wiki_util.py">
       <SubType>Code</SubType>
     </Compile>
@@ -68,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.yml" />
+    <Content Include="function.json" />
     <Content Include="logging_debug.conf" />
     <Content Include="requirements.txt" />
   </ItemGroup>
