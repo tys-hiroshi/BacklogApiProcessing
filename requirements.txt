@@ -1,0 +1,2 @@
+azure-functions
+backlogapiprocessing==0.0.9

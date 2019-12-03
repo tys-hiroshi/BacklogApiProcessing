@@ -7,10 +7,13 @@ from utils.Config import Config
 from utils.Logger import Logger
 from utils.AppManager import AppManager
 
-ConfigFile = 'config.yml'
-LogConfigFile = 'logging_debug.conf'
+#print(sys.prefix)
+#print(sys.path)
 
-def run(argv=[]):
+#ConfigFile = 'config.yml'
+#LogConfigFile = 'logging_debug.conf'
+
+def run(configFile = 'config.yml', logConfigFile = 'logging_debug.conf'):
     def doProcessing(day, config, logger):
         beginDate = datetime(day.year, day.month, 1)
         endDate = datetime(day.year, day.month, 1) + relativedelta(months=1) - relativedelta(days=1)
@@ -26,14 +29,10 @@ def run(argv=[]):
         app.reportSummary(config['PROCESSING_UPDATE_WIKI']['SUMMARY_WIKI_ID'], periodLabel, maxComments)
         app.reportDetail(config['PROCESSING_UPDATE_WIKI']['DETAIL_WIKI_ID'], periodLabel, maxComments)
 
-    config = Config(ConfigFile).content
-    logger = Logger(LogConfigFile)
+    config = Config(configFile).content
+    logger = Logger(logConfigFile)
 
-    argc = len(argv)
-    if argc > 1: # 引数が指定された場合
-        days = [datetime.strptime(day, '%Y-%m') for day in argv[1:]]
-    else:
-        days = [datetime.today()]
+    days = [datetime.today()]
 
     for day in days:
         doProcessing(day, config, logger)
@@ -42,5 +41,9 @@ if __name__ == '__main__':
     '''
     Usage: [python] BacklogApiProcessing.py [yyyy-mm [...]]
     '''
+    logger.info('start backlogapiprocessing.')
     import sys
-    run(sys.argv)
+    #run(sys.argv)
+    configFile = 'config.yml'
+    logConfigFile = 'logging_debug.conf'
+    run(configFile, logConfigFile)

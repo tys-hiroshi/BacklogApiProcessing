@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=webjobsappconsoleappv1;AccountKey=pmgeCrhJ0G137pU/6vsrJjnt1vVqxVdFuYk9AY0WW/Vd+R+V7wajltQ0V679p15Mww2UtcDA1marV4lHmgWZYA==;EndpointSuffix=core.windows.net",
+  },
+  "Host": {
+    "LocalHttpPort": 7071,
+    "CORS": "*",
+    "CORSCredentials": false
+  }
+}
