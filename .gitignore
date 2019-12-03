@@ -1,3 +1,6 @@
+*~
+\#*\#
+
 config.yml
 
 # Byte-compiled / optimized / DLL files
@@ -439,3 +442,4 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+AzureFunctionProj/BacklogApiTimerTrigger/config_prod.yml
