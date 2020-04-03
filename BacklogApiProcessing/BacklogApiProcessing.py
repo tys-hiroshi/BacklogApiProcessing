@@ -23,10 +23,11 @@ from pybacklog import BacklogClient
 configUtil = config_util.ConfigUtil()
 config_data = configUtil.read_yaml_file('config.yml')
 
-HOST = config_data['HOST']['GLOBAL']
-API_KEY = config_data['API_KEY']['GLOBAL']
+HOST = config_data['HOST']['URL']
+API_KEY = config_data['API_KEY']['VALUE']
+SPACE_NAME = config_data['HOST']['SPACE_NAME']
 
-client = BacklogClient("toyoko", API_KEY)
+client = BacklogClient(SPACE_NAME, API_KEY)
 
 # Log
 logUtil = log_util.LogUtil()
