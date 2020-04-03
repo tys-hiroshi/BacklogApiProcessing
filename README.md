@@ -9,7 +9,9 @@ BacklogApiProcessing is the totaling up of issues that the issue type in term.
 2.You should modifiy BacklogApiProcessing/BacklogApiProcessing/config.yml.
 
 ```
-API_KEY.GLOBAL is global api key.
+HOST.URL is base url for target api.
+HOST.SPACE_NAME is target backlog space name.
+API_KEY.VALUE is api key.
 PROCESSING_PROJECT_KEY is project keys of the totaling up.
 PROCESSING_TERM is term of the totaling up.
 PROCESSING_ISSUE_TYPE_NAME is issue type name of the totaling up.
