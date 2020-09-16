@@ -27,6 +27,10 @@ def main(mytimer: func.TimerRequest) -> None:
         backlogapiprocess.run(ConfigFilePath, LoggingConfigFilePath)
     except Exception as e:
         chatwork_config = Config(ConfigFilePath).content["ALERT"]
+        if not chatwork_config["IS_ENABLE"]:
+            logging.error(e)
+            pass
+
         api_token = chatwork_config["CHATWORK_API_TOKEN"]
         room_id = chatwork_config["CHATWORK_ROOM_ID"]
         to_account_list = chatwork_config["CHATWORK_TO_ACCOUNT_LIST"]
