@@ -12,7 +12,7 @@ BacklogApiProcessing is the totaling up of issues that the issue type in term on
 API_KEY.GLOBAL is global api key. (*)
 WIKI_SPACE is workspace name (*)
 PROCESSING_PROJECT_KEY is project keys of the totaling up. (*)
-PROCESSING_DATETIME is executing datetime of the totaling up. (If this is empty, datetime is used datetime now.)
+PROCESSING_DATETIME ( format: %Y-%m-%d %H:%M:%S ) is executing datetime of the totaling up. (If this is empty, datetime is used datetime now.)
 PROCESSING_ISSUE_TYPE_NAME is issue type name of the totaling up. (*)
 PROCESSING_UPDATE_WIKI.SUMMARY_WIKI_ID is update summary wiki id. (*)
 PROCESSING_UPDATE_WIKI.DETAIL_WIKI_ID is update detail wiki id. (*)
@@ -47,3 +47,12 @@ https://github.com/tys-hiroshi/backlogprocessing/tree/master
 
 https://docs.microsoft.com/ja-jp/cli/azure/install-azure-cli?view=azure-cli-latest
 
+
+### Migrate requirements.txt to Pipfile
+
+https://www.kabuku.co.jp/developers/python-pipenv-graph
+
+```
+pipenv install -r requirements.txt
+pipenv graph
+```
