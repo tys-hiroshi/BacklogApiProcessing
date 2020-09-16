@@ -47,3 +47,12 @@ https://github.com/tys-hiroshi/backlogprocessing/tree/master
 
 https://docs.microsoft.com/ja-jp/cli/azure/install-azure-cli?view=azure-cli-latest
 
+
+### Migrate requirements.txt to Pipfile
+
+https://www.kabuku.co.jp/developers/python-pipenv-graph
+
+```
+pipenv install -r requirements.txt
+pipenv graph
+```
