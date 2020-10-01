@@ -1,2 +1,2 @@
-backlogprocessing
+backlogprocessing>=0.1.4
 chatworkpy
